@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список школ МОШ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: url('https://example.com/spring-background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        .explosion {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, #ffcc00, #ff4500);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: explode 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+
+        .school-list {
+            list-style-type: none;
+            padding: 0;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2.5s;
+        }
+
+        .school-item {
+            background: rgba(255, 105, 180, 0.8);
+            margin: 15px auto;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            width: 80%;
+            max-width: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .school-item:hover {
+            transform: scale(1.05);
+        }
+
+        .school-item i {
+            color: #fff;
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+        .contact {
+            margin-top: 30px;
+            font-size: 1.5em;
+            background: rgba(255, 165, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            transition: background 0.3s;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+            animation-delay: 2.5s;
+        }
+
+        .contact:hover {
+            background: rgba(255, 165, 0, 1);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="explosion"></div>
+    <h1>Список школ МОШ</h1>
+    <ul class="school-list">
+        <li class="school-item"><i class="fas fa-school"></i> ГБОУ «СОШ №276» <span>Директор: Накиев Ильнар</span></li>
+        <li class="school-item"><i class="fas fa-school"></i> МБОУ Лицей №46 <span>Директор: Матвей Ямолодинов</span></li>
+        <li class="school-item"><i class="fas fa-school"></i> ГБОУ Гимназия №14 <span>Директор: Белкин Никита</span></li>
+    </ul>
+
+    <div class="contact">
+        Остальные школы можно присоединиться по почте: <a href="mailto:behruz@schoolbehruz.planfix.ru" style="color: #fff; text-decoration: underline;">behruz@schoolbehruz.planfix.ru</a>
+    </div>
+
+</body>
+</html>
