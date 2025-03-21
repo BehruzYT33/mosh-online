@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Технический перерыв</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #4a148c;
+            text-align: center;
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+        @keyframes backgroundAnimation {
+            0% { background: linear-gradient(135deg, #ffdde1, #ee9ca7); }
+            100% { background: linear-gradient(135deg, #fbc2eb, #a6c1ee); }
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px 50px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease;
+            max-width: 90%;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #d81b60;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        p {
+            font-size: 1.5rem;
+            color: #4a148c;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+        .flowers {
+            margin-top: 20px;
+            font-size: 2rem;
+            animation: floatFlowers 3s ease-in-out infinite;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        @keyframes floatFlowers {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌷 Уважаемые пользователи! 🌸</h1>
+        <p>На сайте ведётся технический перерыв.<br>Скоро всё снова заработает! Благодарим за ваше терпение. 🌼</p>
+        <div class="flowers">🌺 🌻 🌹 🌼 🌸 🌷 💐</div>
+    </div>
+</body>
+</html>
