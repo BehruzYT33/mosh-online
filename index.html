@@ -7,9 +7,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
-            background: url('https://example.com/spring-background.jpg') no-repeat center center fixed;
+            background: url('https://images.unsplash.com/photo-1518770660439-4636170af475') no-repeat center center fixed;
             background-size: cover;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
+            font-family: 'Arial', sans-serif;
             color: #333;
             padding: 20px;
             overflow: hidden; /* Убираем прокрутку на body */
@@ -18,13 +18,15 @@
         h1 {
             font-size: 3em;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+            color: #ffffff;
         }
 
         .tagline {
             font-size: 1.5em;
             margin-bottom: 20px;
-            color: #ff6347;
+            color: #ffcc00;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
         }
 
         .container {
@@ -33,16 +35,17 @@
             padding: 20px;
             border-radius: 15px;
             background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
         .service {
             margin: 15px auto;
             padding: 20px;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             position: relative;
-            animation: fadeIn 1s forwards;
+            animation: fadeIn 0.5s forwards;
+            background: linear-gradient(135deg, #e0f7fa, #ffffff);
         }
 
         @keyframes fadeIn {
@@ -51,26 +54,30 @@
         }
 
         .service i {
-            color: #ff4500;
-            font-size: 2em;
+            color: #ff5722;
+            font-size: 2.5em;
             margin-right: 10px;
+            transition: transform 0.3s;
         }
 
-        .animated-figure {
-            width: 50px;
-            height: 50px;
-            background: #ffcc00;
-            border-radius: 50%;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
+        .service:hover i {
+            transform: scale(1.1);
+        }
+
+        .highlight {
+            color: #ff5722;
+            font-weight: bold;
+            animation: bounce 1s infinite;
         }
 
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .money-icon {
+            color: #ff5722;
+            margin-right: 5px;
         }
 
         .contact {
@@ -80,11 +87,12 @@
             padding: 15px;
             border-radius: 10px;
             display: inline-block;
-            transition: background 0.3s;
+            transition: background 0.3s, transform 0.3s;
         }
 
         .contact:hover {
             background: rgba(255, 165, 0, 1);
+            transform: scale(1.05);
         }
 
         .vk-link {
@@ -93,9 +101,11 @@
             text-decoration: none;
             color: #0077ff;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         .vk-link:hover {
+            color: #003366;
             text-decoration: underline;
         }
     </style>
@@ -109,26 +119,27 @@
 
     <div class="container">
         <div class="service">
-            <div class="animated-figure"></div>
+            <i class="fas fa-book"></i>
             <h2>Наши услуги:</h2>
-            <p><i class="fas fa-book"></i> Электронные журналы выдачи АИС "Школа", Инновационная школа и другие.</p>
+            <p>Электронные журналы выдачи АИС "Школа", Инновационная школа и другие.</p>
             <p>Заказывайте нам на почту: <a href="mailto:behruz@schoolbehruz.planfix.ru">behruz@schoolbehruz.planfix.ru</a></p>
         </div>
 
         <div class="service">
-            <div class="animated-figure"></div>
-            <h2>Услуга: Создание сайтов школы НОВОЕ</h2>
-            <p><i class="fas fa-laptop-code"></i> Бесплатно (фигура анимация)</p>
+            <i class="fas fa-laptop-code"></i>
+            <h2>Услуга: Создание сайтов школы</h2>
             <p>Заказать сайт на другую тематику:</p>
-            <p>Стоимость: 15 000 — 18 000 сум</p>
-            <p>Перевод в рублях: 97,93 — 117,52</p>
+            <p><i class="fas fa-money-bill-wave money-icon"></i>
+            <span class="highlight">Стоимость:</span> 15 000 — 18 000 сум</p>
+            <p><i class="fas fa-exchange-alt money-icon"></i>
+            <span class="highlight">Перевод в рублях:</span> 97,93 — 117,52</p>
             <p>Заинтересовала услуга? Пишите на почту: <a href="mailto:behruz@schoolbehruz.planfix.ru">behruz@schoolbehruz.planfix.ru</a></p>
         </div>
 
         <div class="service">
-            <div class="animated-figure"></div>
+            <i class="fas fa-check-circle"></i>
             <h2>Выдача электронных журналов</h2>
-            <p><i class="fas fa-check-circle"></i> Бесплатно ✅ (фигура анимация)</p>
+            <p><span class="highlight">Бесплатно</span> <i class="fas fa-check-circle"></i></p>
             <p>Подключение школы или присоединение</p>
             <p>Мы будем рады видеть вас в нашей компании!</p>
         </div>
@@ -140,4 +151,3 @@
 
 </body>
 </html>
-
