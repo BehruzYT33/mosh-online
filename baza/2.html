@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сотрудничество | МОШ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --secondary: #8B5CF6;
+            --accent: #EC4899;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --success: #10B981;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f3f4f6;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            background: 
+                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 25%);
+        }
+
+        /* Header Styles */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background: 
+                linear-gradient(45deg, transparent 48%, white 49%, white 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, white 49%, white 51%, transparent 52%);
+            background-size: 30px 30px;
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes patternMove {
+            from { background-position: 0 0; }
+            to { background-position: 60px 60px; }
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Partnership Card */
+        .partnership-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partnership-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .card-icon i {
+            font-size: 40px;
+            color: white;
+        }
+
+        /* Email Section */
+        .email-section {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .email-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .email-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .email-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .email-content {
+            flex-grow: 1;
+        }
+
+        .email-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 1em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .email-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Partners List */
+        .partners-list {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .partner-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .partner-item:hover {
+            transform: translateX(10px);
+        }
+
+        .partner-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-icon i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .partner-info {
+            flex-grow: 1;
+        }
+
+        .partner-status {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--warning);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .warning-box i {
+            color: var(--warning);
+            font-size: 24px;
+        }
+
+        /* User Info & Time */
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .time-display {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            font-family: monospace;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <div class="user-info">
+        <i class="fas fa-user"></i>
+        <span>BehruzYT33</span>
+    </div>
+
+    <header class="header">
+        <div class="header-pattern"></div>
+        <div class="header-content">
+            <h1>Сотрудничество</h1>
+            <p>Министерство онлайн школ</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="partnership-card">
+            <div class="card-icon">
+                <i class="fas fa-handshake"></i>
+            </div>
+            <h2>Совместная работа</h2>
+            <p>Если вы заинтересованы в сотрудничестве с Министерством онлайн школ, мы будем рады обсудить все вопросы и возможности совместной работы.</p>
+        </div>
+
+        <div class="email-section">
+            <div class="email-icon">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="email-content">
+                <h3>Свяжитесь с нами</h3>
+                <p>support@mosonlineschool.zohodesk.com</p>
+            </div>
+            <a href="mailto:support@mosonlineschool.zohodesk.com" class="email-button">
+                <i class="fas fa-paper-plane"></i>
+                Написать
+            </a>
+        </div>
+
+        <div class="warning-box">
+            <i class="fas fa-exclamation-triangle"></i>
+            <div>
+                <strong>Важно!</strong>
+                <p>ФОРМА ЗАЯВКИ ОТПРАВЛЯЕТСЯ ПОЧТОЙ ВРУЧНУЮ БЕЗ ДОКУМЕНТОВ!</p>
+            </div>
+        </div>
+
+        <div class="partners-list">
+            <h2>Список образовательных учреждений</h2>
+            <div class="partner-item">
+                <div class="partner-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="partner-info">
+                    <h3>Умные педагоги (УП)</h3>
+                    <p>Образовательное учреждение</p>
+                </div>
+                <span class="partner-status">
+                    <i class="fas fa-check-circle"></i>
+                    МОШ
+                </span>
+            </div>
+        </div>
+    </main>
+
+    <div class="time-display">
+        <i class="far fa-clock"></i>
+        <span>2025-05-05 20:41:21 UTC</span>
+    </div>
+</body>
+</html>
