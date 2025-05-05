@@ -3,114 +3,294 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Список школ МОШ</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Школы МОШ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #2563EB;
+            --secondary: #3B82F6;
+            --accent: #60A5FA;
+            --dark: #1E293B;
+            --light: #F8FAFC;
+            --success: #059669;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: url('https://example.com/spring-background.jpg') no-repeat center center fixed;
-            background-size: cover;
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0F172A;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background: 
+                linear-gradient(45deg, #2563EB 25%, transparent 25%) -50px 0,
+                linear-gradient(-45deg, #2563EB 25%, transparent 25%) -50px 0,
+                linear-gradient(45deg, transparent 75%, #2563EB 75%) -50px 0,
+                linear-gradient(-45deg, transparent 75%, #2563EB 75%) -50px 0;
+            background-size: 100px 100px;
+            animation: patternMove 20s linear infinite;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: -50px 0, -50px 0, -50px 0, -50px 0; }
+            100% { background-position: 50px 100px, 50px 100px, 50px 100px, 50px 100px; }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem 0;
+            position: relative;
             overflow: hidden;
         }
 
-        h1 {
-            font-size: 3em;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 1s;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes fadeIn {
-            to { opacity: 1; }
+        .header-title {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
         }
 
-        .explosion {
+        /* Schools Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* School Cards */
+        .school-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .school-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .school-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .school-card::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 150px;
-            height: 150px;
-            background: radial-gradient(circle, #ffcc00, #ff4500);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .school-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            animation: explode 1s forwards;
-            animation-delay: 0.5s;
-        }
-
-        @keyframes explode {
-            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
-            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
-        }
-
-        .school-list {
-            list-style-type: none;
-            padding: 0;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 2.5s;
-        }
-
-        .school-item {
-            background: rgba(255, 105, 180, 0.8);
-            margin: 15px auto;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            width: 80%;
-            max-width: 600px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            transition: transform 0.2s;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2em;
         }
 
-        .school-item:hover {
-            transform: scale(1.05);
+        .school-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: iconFloat 3s ease-in-out infinite;
         }
 
-        .school-item i {
-            color: #fff;
-            font-size: 2em;
-            margin-right: 10px;
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
         }
 
-        .contact {
-            margin-top: 30px;
-            font-size: 1.5em;
-            background: rgba(255, 165, 0, 0.8);
-            padding: 15px;
-            border-radius: 10px;
-            display: inline-block;
-            transition: background 0.3s;
-            opacity: 0;
-            animation: fadeIn 2s forwards;
-            animation-delay: 2.5s;
+        .school-icon i {
+            font-size: 32px;
+            color: white;
         }
 
-        .contact:hover {
-            background: rgba(255, 165, 0, 1);
+        .school-name {
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .director {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .director-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .director-avatar i {
+            font-size: 24px;
+            color: white;
+        }
+
+        .director-info {
+            flex-grow: 1;
+        }
+
+        .director-name {
+            font-weight: bold;
+            color: white;
+        }
+
+        .director-title {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+
+        /* Info Display */
+        .info-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .user-info, .time-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-display i {
+            color: var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .info-display {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .school-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-pattern"></div>
 
-    <div class="explosion"></div>
-    <h1>Список школ МОШ</h1>
-    <ul class="school-list">
-        <li class="school-item"><i class="fas fa-school"></i> ГБОУ «СОШ №276» <span>Директор: Накиев Ильнар</span></li>
-        <li class="school-item"><i class="fas fa-school"></i> МБОУ Лицей №46 <span>Директор: Матвей Ямолодинов</span></li>
-        <li class="school-item"><i class="fas fa-school"></i> ГБОУ Гимназия №14 <span>Директор: Белкин Никита</span></li>
-    </ul>
-
-    <div class="contact">
-        Остальные школы можно присоединиться по почте: <a href="mailto:behruz@schoolbehruz.planfix.ru" style="color: #fff; text-decoration: underline;">behruz@schoolbehruz.planfix.ru</a>
+    <div class="info-display">
+        <div class="user-info">
+            <i class="fas fa-user"></i>
+            <span>BehruzYT33</span>
+        </div>
+        <div class="time-display">
+            <i class="far fa-clock"></i>
+            <span>2025-05-05 21:06:13</span>
+        </div>
     </div>
 
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Школы МОШ</h1>
+            <p>Министерство онлайн школ</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="school-grid">
+            <!-- School 1 -->
+            <div class="school-card">
+                <div class="school-number">1</div>
+                <div class="school-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h2 class="school-name">МАОУ «Гимназия №1»</h2>
+                <div class="director">
+                    <div class="director-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="director-info">
+                        <div class="director-name">Власов Максим Андреевич</div>
+                        <div class="director-title">Директор</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- School 2 -->
+            <div class="school-card">
+                <div class="school-number">2</div>
+                <div class="school-icon">
+                    <i class="fas fa-school"></i>
+                </div>
+                <h2 class="school-name">ГБОУ ЛНР «АСШ №15»</h2>
+                <div class="director">
+                    <div class="director-avatar">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <div class="director-info">
+                        <div class="director-name">Илюхин Максим Дмитриевич</div>
+                        <div class="director-title">Директор</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
 </html>
