@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Технические работы | Сайт временно недоступен</title>
+    <title>МОШ | Министерство образования онлайн школ</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #2196F3;
-            --secondary: #00BCD4;
-            --accent: #FF4081;
-            --dark: #263238;
-            --light: #ECEFF1;
+            --primary: #1a5f7a;
+            --secondary: #2C3E50;
+            --accent: #3498DB;
+            --gold: #f1c40f;
+            --light: #ECF0F1;
+            --dark: #2C3E50;
         }
 
         * {
@@ -22,267 +23,375 @@
 
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--dark);
-            color: var(--light);
-            min-height: 100vh;
+            background-color: #f5f6fa;
+            color: var(--dark);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Educational Background Pattern */
+        .bg-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            opacity: 0.05;
+            background: 
+                linear-gradient(45deg, transparent 48%, var(--primary) 49%, var(--primary) 51%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, var(--primary) 49%, var(--primary) 51%, transparent 52%);
+            background-size: 40px 40px;
+        }
+
+        /* Animated Educational Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .edu-icon {
+            position: absolute;
+            font-size: 24px;
+            color: var(--primary);
+            opacity: 0.1;
+            animation: float 10s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, -20px) rotate(10deg); }
+        }
+
+        /* Герб/Логотип министерства */
+        .ministry-emblem {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            animation: emblemGlow 3s infinite;
+        }
+
+        @keyframes emblemGlow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); }
+            50% { box-shadow: 0 4px 25px rgba(26, 95, 122, 0.3); }
+        }
+
+        /* Header with Ministry Style */
+        header {
+            background: linear-gradient(to right, rgba(26, 95, 122, 0.95), rgba(44, 62, 80, 0.95));
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        /* Animated Background */
-        .background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                linear-gradient(45deg, rgba(33, 150, 243, 0.1), transparent),
-                radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.05) 0%, transparent 50%);
-        }
-
-        .circuit-lines {
+        .header-pattern {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
-                linear-gradient(to right, rgba(33, 150, 243, 0.1) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(33, 150, 243, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            animation: circuitMove 20s linear infinite;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
         }
 
-        @keyframes circuitMove {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(50px); }
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 800px;
-            padding: 40px;
-            text-align: center;
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             position: relative;
             z-index: 1;
         }
 
-        .maintenance-icon {
-            font-size: 80px;
-            color: var(--primary);
-            margin-bottom: 30px;
-            animation: wrench 3s ease infinite;
-        }
-
-        @keyframes wrench {
-            0%, 100% { transform: rotate(0deg); }
-            20%, 80% { transform: rotate(-15deg); }
-            50% { transform: rotate(15deg); }
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            color: var(--primary);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .status-message {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            line-height: 1.6;
-            color: var(--light);
-        }
-
-        /* Progress Bar */
-        .progress-container {
-            width: 100%;
-            max-width: 400px;
-            margin: 30px auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 5px;
-            position: relative;
-        }
-
-        .progress-bar {
-            width: 75%;
-            height: 20px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 8px;
-            animation: progress 2s ease-in-out infinite;
-        }
-
-        @keyframes progress {
-            0% { width: 0%; }
-            100% { width: 75%; }
-        }
-
-        /* Technical Details */
-        .technical-details {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-            font-family: monospace;
-            text-align: left;
-        }
-
-        .detail-line {
-            margin: 10px 0;
-            color: var(--light);
-            font-size: 0.9em;
-        }
-
-        .detail-line span {
-            color: var(--secondary);
-        }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            font-size: 24px;
-            color: var(--primary);
-            opacity: 0.2;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 15px 25px;
-            border-radius: 10px;
+        .ministry-title {
             display: flex;
             align-items: center;
-            gap: 10px;
-            animation: slideIn 0.5s ease-out;
+            gap: 20px;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+        .ministry-logo {
+            font-size: 2.5em;
+            color: var(--gold);
+            animation: spin 20s linear infinite;
         }
 
-        .pulse {
-            width: 10px;
-            height: 10px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.5); opacity: 0.5; }
-            100% { transform: scale(1); opacity: 1; }
+        .title-text {
+            flex-direction: column;
         }
 
-        /* Estimated Time */
-        .estimated-time {
-            margin-top: 30px;
-            font-size: 1.1em;
+        .title-main {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .title-sub {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        /* Team Section Styling */
+        .team-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .member-card {
+            background: linear-gradient(145deg, #ffffff, #f5f6fa);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .member-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .member-photo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: morphShape 8s ease-in-out infinite;
+        }
+
+        @keyframes morphShape {
+            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            50% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        }
+
+        .member-photo i {
+            font-size: 3em;
+            color: white;
+        }
+
+        .member-info {
+            text-align: center;
+        }
+
+        .member-name {
+            font-size: 1.5em;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .member-role {
+            color: var(--secondary);
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .member-gender {
+            font-size: 1.2em;
             color: var(--accent);
         }
 
-        #countdown {
-            font-weight: bold;
+        /* Social Media Section */
+        .social-section {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 40px 0;
+            margin-top: 60px;
+            color: white;
+            text-align: center;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            border-radius: 30px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .social-link i {
+            font-size: 1.5em;
+        }
+
+        /* Current Time Display */
+        .time-display {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             font-family: monospace;
+            font-size: 0.9em;
+            color: var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .ministry-title {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="background">
-        <div class="circuit-lines"></div>
+    <!-- Background Pattern -->
+    <div class="bg-pattern"></div>
+
+    <!-- Floating Educational Icons -->
+    <div class="floating-elements">
+        <i class="fas fa-book edu-icon" style="top: 15%; left: 10%;"></i>
+        <i class="fas fa-graduation-cap edu-icon" style="top: 25%; right: 15%;"></i>
+        <i class="fas fa-pencil-alt edu-icon" style="top: 45%; left: 20%;"></i>
+        <i class="fas fa-globe edu-icon" style="top: 65%; right: 10%;"></i>
+        <i class="fas fa-microscope edu-icon" style="top: 85%; left: 15%;"></i>
     </div>
 
-    <!-- Floating Technical Icons -->
-    <div class="floating-element" style="top: 10%; left: 10%;"><i class="fas fa-code"></i></div>
-    <div class="floating-element" style="top: 20%; right: 15%;"><i class="fas fa-database"></i></div>
-    <div class="floating-element" style="bottom: 15%; left: 20%;"><i class="fas fa-server"></i></div>
-    <div class="floating-element" style="bottom: 25%; right: 10%;"><i class="fas fa-cogs"></i></div>
-
-    <div class="container">
-        <div class="maintenance-icon">
-            <i class="fas fa-wrench"></i>
-        </div>
-
-        <h1>Технические работы</h1>
-        
-        <p class="status-message">
-            В данный момент мы проводим плановые технические работы для улучшения производительности системы.
-            <br>Приносим извинения за временные неудобства.
-        </p>
-
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
-
-        <div class="technical-details">
-            <div class="detail-line">
-                <i class="fas fa-clock"></i> Начало работ: <span>2025-05-05 18:44:58 UTC</span>
+    <header>
+        <div class="header-pattern"></div>
+        <div class="header-content">
+            <div class="ministry-title">
+                <i class="fas fa-university ministry-logo"></i>
+                <div class="title-text">
+                    <div class="title-main">МОШ</div>
+                    <div class="title-sub">Министерство образования онлайн школ</div>
+                </div>
             </div>
-            <div class="detail-line">
-                <i class="fas fa-server"></i> Статус сервера: <span>Обновление системы</span>
-            </div>
-            <div class="detail-line">
-                <i class="fas fa-tasks"></i> Прогресс: <span>75%</span>
-            </div>
-            <div class="detail-line">
-                <i class="fas fa-code-branch"></i> Версия обновления: <span>2.5.0</span>
-            </div>
+            <a href="https://vk.com/mos_online_school" class="social-link" target="_blank">
+                <i class="fab fa-vk"></i>
+                <span>Официальная страница ВКонтакте</span>
+            </a>
         </div>
+    </header>
 
-        <div class="estimated-time">
-            Ориентировочное время завершения работ:
-            <div id="countdown">01:30:00</div>
+    <section class="team-section">
+        <div class="team-grid">
+            <!-- Руководитель -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="member-info">
+                    <h2 class="member-name">Ахмедов Бехруз</h2>
+                    <p class="member-role">Руководитель</p>
+                    <i class="fas fa-mars member-gender"></i>
+                </div>
+            </div>
+
+            <!-- Заместитель -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <div class="member-info">
+                    <h2 class="member-name">Амик Оганнисян</h2>
+                    <p class="member-role">Заместитель</p>
+                    <i class="fas fa-mars member-gender"></i>
+                </div>
+            </div>
+
+            <!-- Заместитель №2 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <div class="member-info">
+                    <h2 class="member-name">Иванова Елена</h2>
+                    <p class="member-role">Заместитель №2</p>
+                    <i class="fas fa-venus member-gender"></i>
+                </div>
+            </div>
+
+            <!-- Оператор 1 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="member-info">
+                    <h2 class="member-name">Хакимова Дильноза</h2>
+                    <p class="member-role">Оператор</p>
+                    <i class="fas fa-venus member-gender"></i>
+                </div>
+            </div>
+
+            <!-- Оператор 2 -->
+            <div class="member-card">
+                <div class="member-photo">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="member-info">
+                    <h2 class="member-name">Максим Власов</h2>
+                    <p class="member-role">Оператор</p>
+                    <i class="fas fa-mars member-gender"></i>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <div class="time-display">
+        <i class="far fa-clock"></i> UTC: 2025-05-05 19:15:48
     </div>
-
-    <div class="notification">
-        <div class="pulse"></div>
-        Системное обновление в процессе
-    </div>
-
-    <script>
-        // Countdown Timer
-        function updateCountdown() {
-            const countdownElement = document.getElementById('countdown');
-            let time = countdownElement.innerHTML;
-            let [hours, minutes, seconds] = time.split(':').map(Number);
-
-            setInterval(() => {
-                if (seconds > 0) {
-                    seconds--;
-                } else if (minutes > 0) {
-                    minutes--;
-                    seconds = 59;
-                } else if (hours > 0) {
-                    hours--;
-                    minutes = 59;
-                    seconds = 59;
-                }
-
-                countdownElement.innerHTML = 
-                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            }, 1000);
-        }
-
-        updateCountdown();
-    </script>
 </body>
 </html>
