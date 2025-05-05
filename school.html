@@ -157,6 +157,59 @@
             color: white;
         }
 
+        /* Journal Info Styles */
+        .journal-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .journal-info:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .journal-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: journalIconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes journalIconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .journal-icon i {
+            font-size: 20px;
+            color: white;
+        }
+
+        .journal-details {
+            flex-grow: 1;
+        }
+
+        .journal-label {
+            font-size: 0.9em;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 4px;
+        }
+
+        .journal-name {
+            font-weight: bold;
+            color: white;
+        }
+
         .director {
             display: flex;
             align-items: center;
@@ -242,7 +295,7 @@
         </div>
         <div class="time-display">
             <i class="far fa-clock"></i>
-            <span>2025-05-05 21:06:13</span>
+            <span>2025-05-05 21:12:23</span>
         </div>
     </div>
 
@@ -262,6 +315,15 @@
                     <i class="fas fa-school"></i>
                 </div>
                 <h2 class="school-name">МАОУ «Гимназия №1»</h2>
+                <div class="journal-info">
+                    <div class="journal-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div class="journal-details">
+                        <div class="journal-label">Электронный журнал</div>
+                        <div class="journal-name">Инновационная школа</div>
+                    </div>
+                </div>
                 <div class="director">
                     <div class="director-avatar">
                         <i class="fas fa-user-tie"></i>
@@ -280,6 +342,15 @@
                     <i class="fas fa-school"></i>
                 </div>
                 <h2 class="school-name">ГБОУ ЛНР «АСШ №15»</h2>
+                <div class="journal-info">
+                    <div class="journal-icon">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <div class="journal-details">
+                        <div class="journal-label">Электронный журнал</div>
+                        <div class="journal-name">ПК "Совёнок"</div>
+                    </div>
+                </div>
                 <div class="director">
                     <div class="director-avatar">
                         <i class="fas fa-user-tie"></i>
