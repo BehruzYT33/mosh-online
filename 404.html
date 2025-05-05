@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 | Страница не найдена</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2196F3;
+            --secondary: #673AB7;
+            --accent: #FF4081;
+            --dark: #37474F;
+            --light: #ECEFF1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #311b92 100%);
+            color: var(--light);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animated Background */
+        .space-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Main Container */
+        .container {
+            text-align: center;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+
+        /* 404 Number Animation */
+        .error-number {
+            font-size: 180px;
+            font-weight: bold;
+            line-height: 1;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Glitch Effect */
+        .error-number::before,
+        .error-number::after {
+            content: '404';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .error-number::before {
+            animation: glitch 3s infinite linear;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+            transform: translate(-2px, 2px);
+        }
+
+        .error-number::after {
+            animation: glitch 2s infinite linear;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+            transform: translate(2px, -2px);
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Message Styling */
+        .error-message {
+            font-size: 2em;
+            margin: 20px 0;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .error-description {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Floating Icons */
+        .floating-icon {
+            position: absolute;
+            font-size: 3em;
+            color: rgba(255, 255, 255, 0.2);
+            animation: floatIcon 10s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, -20px) rotate(10deg); }
+        }
+
+        /* Interactive Button */
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Astronaut Animation */
+        .astronaut {
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            animation: floatAstronaut 15s ease-in-out infinite;
+        }
+
+        @keyframes floatAstronaut {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(50px, -50px) rotate(15deg); }
+            50% { transform: translate(0, -100px) rotate(-15deg); }
+            75% { transform: translate(-50px, -50px) rotate(5deg); }
+        }
+
+        /* UFO Animation */
+        .ufo {
+            position: absolute;
+            width: 150px;
+            height: 80px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 50% 50% 20% 20%;
+            animation: floatUFO 20s ease-in-out infinite;
+        }
+
+        @keyframes floatUFO {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-100px, 50px) rotate(-10deg); }
+        }
+
+        /* Time Display */
+        .time-display {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <!-- Space Background -->
+    <div class="space-bg" id="starField"></div>
+
+    <!-- Floating Icons -->
+    <i class="fas fa-satellite floating-icon" style="top: 15%; left: 10%;"></i>
+    <i class="fas fa-rocket floating-icon" style="top: 25%; right: 15%;"></i>
+    <i class="fas fa-meteor floating-icon" style="bottom: 20%; left: 20%;"></i>
+    <i class="fas fa-space-shuttle floating-icon" style="bottom: 30%; right: 10%;"></i>
+
+    <div class="container">
+        <div class="error-number">404</div>
+        <h1 class="error-message">Страница не найдена</h1>
+        <p class="error-description">
+            Кажется, вы забрели в неизведанные просторы космоса.<br>
+            Давайте вернемся на знакомую территорию!
+        </p>
+        <a href="/" class="home-button">
+            <i class="fas fa-home"></i>
+            Вернуться на главную
+        </a>
+    </div>
+
+    <div class="time-display">
+        <i class="far fa-clock"></i> 2025-05-05 19:20:04 UTC
+    </div>
+
+    <script>
+        // Create stars
+        const starField = document.getElementById('starField');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.style.setProperty('--duration', `${Math.random() * 3 + 1}s`);
+            starField.appendChild(star);
+        }
+    </script>
+</body>
+</html>
