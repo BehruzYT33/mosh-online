@@ -165,24 +165,54 @@
             transform: translateX(10px);
         }
 
-        .list-item::before {
+        /* Strike Through Animation */
+        .list-item.struck {
+            position: relative;
+            opacity: 0.8;
+        }
+
+        .list-item.struck::after {
             content: '';
             position: absolute;
-            left: -100%;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, #ff0000, transparent);
+            animation: strikeThrough 1s ease-in-out forwards;
+            transform-origin: left;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        }
+
+        @keyframes strikeThrough {
+            0% { transform: scaleX(0); }
+            100% { transform: scaleX(1); }
+        }
+
+        .struck .list-number {
+            background: rgba(220, 38, 38, 0.2);
+            color: #ff0000;
+        }
+
+        .struck span:not(.list-number) {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Red glow effect */
+        .list-item.struck::before {
+            content: '';
+            position: absolute;
+            left: 0;
             top: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(
-                90deg,
-                transparent,
-                rgba(255, 255, 255, 0.1),
-                transparent
-            );
-            transition: 0.5s;
+            background: rgba(220, 38, 38, 0.1);
+            animation: glowPulse 2s infinite;
         }
 
-        .list-item:hover::before {
-            left: 100%;
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.2; }
         }
 
         .list-number {
@@ -195,6 +225,24 @@
             justify-content: center;
             font-size: 0.9em;
             flex-shrink: 0;
+        }
+
+        /* Warning icon */
+        .warning-icon {
+            color: #ff0000;
+            margin-left: 10px;
+            animation: warningPulse 1.5s infinite;
+        }
+
+        @keyframes warningPulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
         }
 
         /* Info Display */
@@ -245,7 +293,7 @@
         </div>
         <div class="time-display">
             <i class="far fa-clock"></i>
-            <span>2025-05-05 20:48:02</span>
+            <span>2025-05-05 20:53:43</span>
         </div>
     </div>
 
@@ -269,9 +317,10 @@
                 <i class="fas fa-shield-alt"></i>
                 <h2>Министерство онлайн-школ</h2>
             </div>
-            <div class="list-item">
+            <div class="list-item struck">
                 <span class="list-number">1</span>
                 <span>Поляков Станислав Андреевич</span>
+                <i class="fas fa-exclamation-circle warning-icon"></i>
             </div>
             <div class="list-item">
                 <span class="list-number">2</span>
@@ -283,5 +332,17 @@
             </div>
         </div>
     </main>
+
+    <script>
+        // Trigger strike animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const struckItem = document.querySelector('.struck');
+            if (struckItem) {
+                struckItem.style.animation = 'none';
+                struckItem.offsetHeight; // Trigger reflow
+                struckItem.style.animation = null;
+            }
+        });
+    </script>
 </body>
 </html>
