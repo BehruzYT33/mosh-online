@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус заявки | Zoho</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4A148C;
+            --secondary: #6A1B9A;
+            --accent: #9C27B0;
+            --success: #2E7D32;
+            --warning: #F57C00;
+            --info: #1976D2;
+            --danger: #C62828;
+            --light: #F3E5F5;
+            --dark: #1A237E;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0A1929;
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Animated Background */
+        .bg-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(74, 20, 140, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(156, 39, 176, 0.1) 0%, transparent 50%);
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-title {
+            font-size: 2.5em;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #fff, var(--light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Status Cards Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        /* Status Card */
+        .status-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .status-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+                                      rgba(255, 255, 255, 0.1) 0%,
+                                      transparent 50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .status-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Status Icons */
+        .status-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-icon i {
+            font-size: 32px;
+            color: white;
+            z-index: 1;
+        }
+
+        .status-icon::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--start-color), var(--end-color));
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        .status-open .status-icon {
+            --start-color: #4CAF50;
+            --end-color: #2E7D32;
+        }
+
+        .status-pending .status-icon {
+            --start-color: #FFC107;
+            --end-color: #F57C00;
+        }
+
+        .status-closed .status-icon {
+            --start-color: #F44336;
+            --end-color: #C62828;
+        }
+
+        .status-hold .status-icon {
+            --start-color: #2196F3;
+            --end-color: #1565C0;
+        }
+
+        .status-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .status-description {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* User Info & Time Display */
+        .info-display {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .user-info, .time-display {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .info-display i {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-particles" id="particles"></div>
+
+    <div class="info-display">
+        <div class="user-info">
+            <i class="fas fa-user"></i>
+            <span>BehruzYT33</span>
+        </div>
+        <div class="time-display">
+            <i class="far fa-clock"></i>
+            <span>2025-05-05 21:00:53</span>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <h1 class="header-title">Статус заявки</h1>
+            <p>Система обработки запросов в Zoho</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="status-grid">
+            <div class="status-card status-open">
+                <div class="status-icon">
+                    <i class="fas fa-door-open"></i>
+                </div>
+                <h2 class="status-title">Open</h2>
+                <p class="status-description">Запрос принят и ожидает обработки</p>
+            </div>
+
+            <div class="status-card status-pending">
+                <div class="status-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h2 class="status-title">Pending</h2>
+                <p class="status-description">Запрос требует дополнительной информации</p>
+            </div>
+
+            <div class="status-card status-closed">
+                <div class="status-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="status-title">Closed</h2>
+                <p class="status-description">Запрос полностью закрыт</p>
+            </div>
+
+            <div class="status-card status-hold">
+                <div class="status-icon">
+                    <i class="fas fa-pause-circle"></i>
+                </div>
+                <h2 class="status-title">On Hold</h2>
+                <p class="status-description">Работа над запросом приостановлена</p>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Create floating particles
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 8 + 's';
+            particles.appendChild(particle);
+        }
+
+        // Add hover effect for status cards
+        document.querySelectorAll('.status-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--x', `${x}%`);
+                card.style.setProperty('--y', `${y}%`);
+            });
+        });
+    </script>
+</body>
+</html>
