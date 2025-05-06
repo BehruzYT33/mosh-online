@@ -72,10 +72,28 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
-        .login-container:hover {
-            transform: translateY(-5px);
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.05),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .login-container:hover::before {
+            left: 100%;
         }
 
         /* Logo */
@@ -142,6 +160,27 @@
             color: var(--accent);
         }
 
+        /* Alert Messages */
+        .alert {
+            padding: 15px;
+            border-radius: 12px;
+            margin: 10px 0;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #EF4444;
+        }
+
+        .alert-success {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            color: #10B981;
+        }
+
         /* Buttons */
         .btn {
             width: 100%;
@@ -173,19 +212,50 @@
             box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3);
         }
 
-        .btn::after {
-            content: '';
-            position: absolute;
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
         }
 
-        .btn:hover::after {
-            left: 100%;
+        .modal-content {
+            position: relative;
+            background: rgba(31, 41, 55, 0.95);
+            width: 90%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            animation: slideIn 0.3s ease;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: var(--light);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--danger);
         }
 
         /* Welcome Message */
@@ -193,11 +263,6 @@
             display: none;
             text-align: center;
             animation: fadeIn 0.5s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .profile-notice {
@@ -235,6 +300,44 @@
         .time-display i {
             color: var(--accent);
         }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { 
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .info-display {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .login-container {
+                margin: 20px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -243,7 +346,7 @@
     <div class="info-display">
         <div class="time-display">
             <i class="far fa-clock"></i>
-            <span>2025-05-06 06:53:32</span>
+            <span>2025-05-06 07:03:11</span>
         </div>
     </div>
 
@@ -254,6 +357,16 @@
             </div>
             <h1>МОШ</h1>
             <p>Министерство онлайн школ</p>
+        </div>
+
+        <div class="alert alert-error" id="errorAlert">
+            <i class="fas fa-exclamation-circle"></i>
+            Неверный логин или пароль
+        </div>
+
+        <div class="alert alert-success" id="successAlert">
+            <i class="fas fa-check-circle"></i>
+            Вход выполнен успешно!
         </div>
 
         <form id="loginForm">
@@ -283,6 +396,49 @@
         </div>
     </div>
 
+    <!-- Registration Modal -->
+    <div class="modal" id="registrationModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeRegistrationModal()">&times;</span>
+            <div class="modal-header">
+                <h2>Регистрация</h2>
+                <p>Заполните форму для создания аккаунта</p>
+            </div>
+
+            <form id="registrationForm" class="registration-form">
+                <div class="form-group">
+                    <input type="text" class="input-field" id="regFirstName" placeholder="Имя" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-field" id="regLastName" placeholder="Фамилия" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="input-field" id="regUsername" placeholder="Логин" required>
+                    <i class="fas fa-at"></i>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="input-field" id="regPassword" placeholder="Пароль" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="input-field" id="regPasswordConfirm" placeholder="Подтвердите пароль" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    Зарегистрироваться
+                    <i class="fas fa-user-plus"></i>
+                </button>
+            </form>
+            
+            <div class="registration-success" id="registrationSuccess">
+                <i class="fas fa-check-circle"></i>
+                Регистрация успешна! Теперь вы можете войти в систему.
+            </div>
+        </div>
+    </div>
+
     <script>
         // Create floating particles
         const particles = document.getElementById('particles');
@@ -295,25 +451,100 @@
             particles.appendChild(particle);
         }
 
-        // Form handling
+        // Store registered users
+        let registeredUsers = {
+            'BehruzYT33': 'admin123',
+            'test': 'test123'
+        };
+
+        // Registration Modal Functions
+        function showRegistration() {
+            document.getElementById('registrationModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRegistrationModal() {
+            document.getElementById('registrationModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('registrationForm').reset();
+            document.getElementById('registrationSuccess').style.display = 'none';
+            document.getElementById('registrationForm').style.display = 'block';
+        }
+
+        // Handle Registration Form
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const firstName = document.getElementById('regFirstName').value;
+            const lastName = document.getElementById('regLastName').value;
+            const username = document.getElementById('regUsername').value;
+            const password = document.getElementById('regPassword').value;
+            const passwordConfirm = document.getElementById('regPasswordConfirm').value;
+
+            // Validation
+            if (registeredUsers[username]) {
+                alert('Этот логин уже занят. Пожалуйста, выберите другой.');
+                return;
+            }
+
+            if (password !== passwordConfirm) {
+                alert('Пароли не совпадают');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Пароль должен содержать не менее 6 символов');
+                return;
+            }
+
+            // Register new user
+            registeredUsers[username] = password;
+
+            // Show success message
+            document.getElementById('registrationForm').style.display = 'none';
+            document.getElementById('registrationSuccess').style.display = 'block';
+
+            // Close modal after delay
+            setTimeout(closeRegistrationModal, 2000);
+        });
+
+        // Handle Login Form
         document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorAlert = document.getElementById('errorAlert');
+            const successAlert = document.getElementById('successAlert');
             const welcomeMessage = document.getElementById('welcomeMessage');
             const loginForm = this;
             const userNameDisplay = document.getElementById('userNameDisplay');
             const profileNotice = document.querySelector('.profile-notice');
 
-            // Simulate login
-            loginForm.style.display = 'none';
-            welcomeMessage.style.display = 'block';
-            userNameDisplay.textContent = username;
-            profileNotice.style.display = 'block';
+            if (registeredUsers[username] === password) {
+                errorAlert.style.display = 'none';
+                successAlert.style.display = 'block';
+                
+                setTimeout(() => {
+                    loginForm.style.display = 'none';
+                    successAlert.style.display = 'none';
+                    welcomeMessage.style.display = 'block';
+                    userNameDisplay.textContent = username;
+                    profileNotice.style.display = 'block';
+                }, 1000);
+            } else {
+                errorAlert.style.display = 'block';
+                successAlert.style.display = 'none';
+                loginForm.classList.add('shake');
+                setTimeout(() => loginForm.classList.remove('shake'), 500);
+            }
         });
 
-        function showRegistration() {
-            // You can implement registration logic here
-            alert('Регистрация временно недоступна. Пожалуйста, используйте существующий аккаунт.');
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('registrationModal');
+            if (event.target === modal) {
+                closeRegistrationModal();
+            }
         }
     </script>
 </body>
