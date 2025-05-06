@@ -80,26 +80,13 @@
             font-size: 1.1em;
         }
 
-        .news-image {
-            width: 100%;
-            max-width: 600px;
-            margin: 30px auto;
-            border-radius: 15px;
-            overflow: hidden;
-        }
-
-        .news-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
         .info-bar {
             position: fixed;
             top: 20px;
             right: 20px;
             display: flex;
             gap: 20px;
+            z-index: 1000;
         }
 
         .info-item {
@@ -135,13 +122,75 @@
             font-style: italic;
             color: var(--accent);
         }
+
+        /* Reactions Styles */
+        .reactions-container {
+            margin-top: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+        }
+
+        .reactions-title {
+            margin-bottom: 15px;
+            color: var(--accent);
+            font-size: 1.2em;
+        }
+
+        .reactions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+        }
+
+        .reaction-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reaction-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .reaction-btn.active {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: var(--accent);
+        }
+
+        .reaction-emoji {
+            font-size: 1.5em;
+        }
+
+        .reaction-count {
+            font-size: 0.9em;
+            color: var(--light);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .reaction-btn.active .reaction-emoji {
+            animation: pulse 0.3s ease;
+        }
     </style>
 </head>
 <body>
     <div class="info-bar">
         <div class="info-item">
             <i class="far fa-clock"></i>
-            <span>2025-05-06 07:59:06</span>
+            <span>2025-05-06 08:06:22</span>
         </div>
         <div class="info-item">
             <i class="fas fa-user"></i>
@@ -166,10 +215,6 @@
         <div class="news-content">
             <h2>С праздником Весны и Труда!</h2>
             
-            <div class="news-image">
-                <img src="https://behruzyt33.github.io/mosh-online/auth/1maya.jpg" alt="1 мая">
-            </div>
-
             <div class="paragraph">
                 <span class="highlight">Дорогие друзья, коллеги, студенты и родители!</span><br><br>
                 От всей души поздравляем вас с праздником Весны и Труда!
@@ -184,15 +229,36 @@
             </div>
 
             <div class="paragraph">
-                В Российской империи Первомай, проникнутый духом революционных идей, стал отмечаться с 1890 года. Первомайские маёвки и демонстрации рабочих быстро приобрели политическую окраску, выдвигая требования свержения самодержавия и установления социальной справедливости.
-            </div>
-
-            <div class="paragraph">
-                После Октябрьской революции 1917 года День солидарности трудящихся стал одним из главных государственных праздников в Советской России. Лозунги, звучавшие на демонстрациях, отражали идеологию нового государства: призывы к миру, дружбе между народами и построению коммунистического общества.
-            </div>
-
-            <div class="paragraph">
                 В современной России, в 1992 году, праздник получил своё нынешнее название — Праздник Весны и Труда. Этот день по-прежнему отмечается различными способами: от организованных митингов и шествий до традиционных выездов на природу, символизирующих единение человека с природой и радость весеннего обновления.
+            </div>
+
+            <!-- Reactions Section -->
+            <div class="reactions-container">
+                <div class="reactions-title">
+                    <i class="fas fa-heart"></i> Реакции
+                </div>
+                <div class="reactions-grid">
+                    <div class="reaction-btn" data-reaction="like">
+                        <span class="reaction-emoji">👍</span>
+                        <span class="reaction-count">0</span>
+                    </div>
+                    <div class="reaction-btn" data-reaction="love">
+                        <span class="reaction-emoji">❤️</span>
+                        <span class="reaction-count">0</span>
+                    </div>
+                    <div class="reaction-btn" data-reaction="celebration">
+                        <span class="reaction-emoji">🎉</span>
+                        <span class="reaction-count">0</span>
+                    </div>
+                    <div class="reaction-btn" data-reaction="clap">
+                        <span class="reaction-emoji">👏</span>
+                        <span class="reaction-count">0</span>
+                    </div>
+                    <div class="reaction-btn" data-reaction="flower">
+                        <span class="reaction-emoji">🌸</span>
+                        <span class="reaction-count">0</span>
+                    </div>
+                </div>
             </div>
 
             <div class="news-footer">
@@ -201,5 +267,59 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Initialize reactions from localStorage or default to empty state
+        let reactions = JSON.parse(localStorage.getItem('newsReactions')) || {
+            like: { count: 0, users: [] },
+            love: { count: 0, users: [] },
+            celebration: { count: 0, users: [] },
+            clap: { count: 0, users: [] },
+            flower: { count: 0, users: [] }
+        };
+
+        // Current user
+        const currentUser = 'BehruzYT33';
+
+        // Update reaction counts and active states
+        function updateReactions() {
+            Object.keys(reactions).forEach(reaction => {
+                const btn = document.querySelector(`[data-reaction="${reaction}"]`);
+                const countEl = btn.querySelector('.reaction-count');
+                countEl.textContent = reactions[reaction].count;
+                
+                if (reactions[reaction].users.includes(currentUser)) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            // Save to localStorage
+            localStorage.setItem('newsReactions', JSON.stringify(reactions));
+        }
+
+        // Add click handlers to reaction buttons
+        document.querySelectorAll('.reaction-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const reaction = btn.dataset.reaction;
+                
+                if (reactions[reaction].users.includes(currentUser)) {
+                    // Remove reaction
+                    reactions[reaction].count--;
+                    reactions[reaction].users = reactions[reaction].users.filter(user => user !== currentUser);
+                } else {
+                    // Add reaction
+                    reactions[reaction].count++;
+                    reactions[reaction].users.push(currentUser);
+                }
+                
+                updateReactions();
+            });
+        });
+
+        // Initial update
+        updateReactions();
+    </script>
 </body>
 </html>
