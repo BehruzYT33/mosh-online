@@ -29,7 +29,6 @@
             position: relative;
         }
 
-        /* Educational Background Pattern */
         .bg-pattern {
             position: fixed;
             top: 0;
@@ -44,7 +43,6 @@
             background-size: 40px 40px;
         }
 
-        /* Animated Educational Elements */
         .floating-elements {
             position: fixed;
             top: 0;
@@ -68,7 +66,6 @@
             50% { transform: translate(20px, -20px) rotate(10deg); }
         }
 
-        /* Герб/Логотип министерства */
         .ministry-emblem {
             position: absolute;
             top: 20px;
@@ -89,7 +86,6 @@
             50% { box-shadow: 0 4px 25px rgba(26, 95, 122, 0.3); }
         }
 
-        /* Header with Ministry Style */
         header {
             background: linear-gradient(to right, rgba(26, 95, 122, 0.95), rgba(44, 62, 80, 0.95));
             color: white;
@@ -117,6 +113,58 @@
             align-items: center;
             position: relative;
             z-index: 1;
+        }
+
+        .nav-menu {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item:hover {
+            transform: translateY(-2px);
+            background: white;
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.15);
+        }
+
+        .nav-item i {
+            font-size: 1.2em;
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .nav-item.active i {
+            color: var(--gold);
         }
 
         .ministry-title {
@@ -150,7 +198,6 @@
             opacity: 0.9;
         }
 
-        /* Team Section Styling */
         .team-section {
             max-width: 1200px;
             margin: 40px auto;
@@ -233,7 +280,6 @@
             color: var(--accent);
         }
 
-        /* Social Media Section */
         .social-section {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             padding: 40px 0;
@@ -264,7 +310,24 @@
             font-size: 1.5em;
         }
 
-        /* Current Time Display */
+        .user-info {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .user-info i {
+            color: var(--primary);
+        }
+
         .time-display {
             position: fixed;
             bottom: 20px;
@@ -276,9 +339,12 @@
             font-family: monospace;
             font-size: 0.9em;
             color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -293,20 +359,31 @@
             .team-grid {
                 grid-template-columns: 1fr;
             }
+
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .nav-item {
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Background Pattern -->
     <div class="bg-pattern"></div>
-
-    <!-- Floating Educational Icons -->
     <div class="floating-elements">
         <i class="fas fa-book edu-icon" style="top: 15%; left: 10%;"></i>
         <i class="fas fa-graduation-cap edu-icon" style="top: 25%; right: 15%;"></i>
         <i class="fas fa-pencil-alt edu-icon" style="top: 45%; left: 20%;"></i>
         <i class="fas fa-globe edu-icon" style="top: 65%; right: 10%;"></i>
         <i class="fas fa-microscope edu-icon" style="top: 85%; left: 15%;"></i>
+    </div>
+
+    <div class="user-info">
+        <i class="fas fa-user"></i>
+        <span>BehruzYT33</span>
     </div>
 
     <header>
@@ -326,6 +403,27 @@
         </div>
     </header>
 
+    <nav class="nav-menu">
+        <div class="nav-container">
+            <a href="https://behruzyt33.github.io/mosh-online/school" class="nav-item">
+                <i class="fas fa-school"></i>
+                <span>Список школ</span>
+            </a>
+            <a href="https://behruzyt33.github.io/mosh-online/baza" class="nav-item">
+                <i class="fas fa-book-reader"></i>
+                <span>База знаний</span>
+            </a>
+            <a href="https://behruzyt33.github.io/mosh-online/news" class="nav-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Новости</span>
+            </a>
+            <a href="https://behruzyt33.github.io/mosh-online/auth" class="nav-item">
+                <i class="fas fa-user-lock"></i>
+                <span>Вход</span>
+            </a>
+        </div>
+    </nav>
+
     <section class="team-section">
         <div class="team-grid">
             <!-- Руководитель -->
@@ -334,7 +432,8 @@
                     <i class="fas fa-user-tie"></i>
                 </div>
                 <div class="member-info">
-                    <h2 class="member-name">Ахмедов Бехруз</h2>
+                    <h2 class="member-name">Ахмедов Бехруз</h2
+                                        <h2 class="member-name">Ахмедов Бехруз</h2>
                     <p class="member-role">Руководитель</p>
                     <i class="fas fa-mars member-gender"></i>
                 </div>
@@ -391,7 +490,39 @@
     </section>
 
     <div class="time-display">
-        <i class="far fa-clock"></i> UTC: 2025-05-05 19:15:48
+        <i class="far fa-clock"></i>
+        <span id="currentTime">2025-05-06 08:23:26</span>
     </div>
+
+    <script>
+        // Update time
+        function updateTime() {
+            const timeDisplay = document.getElementById('currentTime');
+            const now = new Date();
+            const timeString = now.toISOString().slice(0, 19).replace('T', ' ');
+            timeDisplay.textContent = timeString;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+
+        // Handle navigation active state
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPath = window.location.pathname;
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            navItems.forEach(item => {
+                if (item.getAttribute('href').includes(currentPath)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Add floating elements animation
+        const floatingElements = document.querySelectorAll('.edu-icon');
+        floatingElements.forEach((element, index) => {
+            element.style.animationDelay = `${index * 2}s`;
+        });
+    </script>
 </body>
 </html>
